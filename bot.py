@@ -22,11 +22,11 @@ def click(imgfile, max_tries=30):
     return False
 
 def place_tower(key):
-    win_corner = pyautogui.locateCenterOnScreen("BTDB2Bot/window_title.png", confidence=0.8)
+    win_corner = pyautogui.locateCenterOnScreen("assets/window_title.png", confidence=0.8)
     xmin, ymin = win_corner.x + 100, win_corner.y + 100
     xmax, ymax = win_corner.x + 1450, win_corner.y + 940
     for i in range(20):
-        res = pyautogui.locateCenterOnScreen("BTDB2Bot/round.png", confidence=0.7)
+        res = pyautogui.locateCenterOnScreen("assets/round.png", confidence=0.7)
         if res is None:
             return False
         pydirectinput.press(key)
@@ -38,15 +38,15 @@ def place_tower(key):
 
 while True:
     # queue into battle
-    click("BTDB2Bot/battle.png")
-    click("BTDB2Bot/ready.png")
-    click("BTDB2Bot/battle2.png")
-    if click("BTDB2Bot/disconnect.png", max_tries=3):  # if opponent disconnected, catch it here and re-enter lobby
+    click("assets/battle.png")
+    click("assets/ready.png")
+    click("assets/battle2.png")
+    if click("assets/disconnect.png", max_tries=3):  # if opponent disconnected, catch it here and re-enter lobby
         continue
 
     time.sleep(6) # wait for battle to start
     # once in battle, send bloons and place towers
-    click("BTDB2Bot/redbloon.png")  # wait for round to start
+    click("assets/redbloon.png")  # wait for round to start
     [pydirectinput.press('a') for i in range(5)]  # send red bloon rush
     [pydirectinput.press('s') for i in range(2)]  # layer blue bloons
 
@@ -55,9 +55,9 @@ while True:
         place_tower("w")  # randomly place 1st tower
     # if shouldcontinue:
     #     time.sleep(28)
-    #     click("BTDB2Bot/surrender.png", max_tries=4)
+    #     click("assets/surrender.png", max_tries=4)
     #     time.sleep(2)
-    #     click("BTDB2Bot/confirm.png", max_tries=4)
-    click("BTDB2Bot/ok.png", max_tries=64)  # wait until you leak to death and the win screen pops up. this may take a while
-    click("BTDB2Bot/discard.png", max_tries=3)  # in case we recieve a chest, discard it
-    click("BTDB2Bot/back.png", max_tries=3)  # back to main menu
+    #     click("assets/confirm.png", max_tries=4)
+    click("assets/ok.png", max_tries=64)  # wait until you leak to death and the win screen pops up. this may take a while
+    click("assets/discard.png", max_tries=3)  # in case we recieve a chest, discard it
+    click("assets/back.png", max_tries=3)  # back to main menu
