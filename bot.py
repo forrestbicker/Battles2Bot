@@ -36,7 +36,7 @@ def click(imgfile, max_tries=30):
     print(f'\rUnable to find button {imgfile}, proceeding to next step')
     return None  # return None if we didn't click anything
 
-def place_tower(key, player):
+def place_tower(key, player, attempts=20, emote=()):
     win_corner = pyautogui.locateCenterOnScreen("assets/window_title.png", confidence=0.8)
     if player == 0:
         xmin, ymin = win_corner.x + 150, win_corner.y + 100
@@ -44,7 +44,7 @@ def place_tower(key, player):
     else:
         xmin, ymin = win_corner.x + 1000, win_corner.y + 100
         xmax, ymax = win_corner.x + 1450, win_corner.y + 940
-    for i in range(20):
+    for i in range(attempts):
         res = pyautogui.locateCenterOnScreen("assets/ok.png", confidence=0.7)
         if res is not None:
             return False
