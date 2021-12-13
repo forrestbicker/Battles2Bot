@@ -48,6 +48,7 @@ def place_tower(key, player, attempts=20, emote=()):
         res = pyautogui.locateCenterOnScreen("assets/ok.png", confidence=0.7)
         if res is not None:
             return False
+        pydirectinput.press('r') # cycle to offhand tower (dart) to change position of desired tower
         pydirectinput.press(key)
         x, y = random.randrange(xmin, xmax), random.randrange(ymin, ymax)
         pyautogui.click(x, y)
