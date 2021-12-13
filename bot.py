@@ -76,12 +76,22 @@ while True:
     if coords is not None and len(coords) == 2:
         x, y = coords
         player = 0 if x < 500 else 1
-        [pydirectinput.press('a') for i in range(5)]  # send red bloon rush
-        [pydirectinput.press('s') for i in range(2)]  # layer blue bloons
+        pydirectinput.press('a', presses=5, interval=0.125)  # send red bloon rush
 
-        shouldcontinue = place_tower("q", player)  # randomly place hero
+        for i in range(5):
+            pydirectinput.press('s')  # layer blue bloons
+            shouldcontinue = place_tower("q", player, attempts=2)  # randomly place hero
+            pydirectinput.keyDown('ctrl')
+            pydirectinput.press('space')  # bloon boost
+            pydirectinput.keyUp('ctrl')
+            pydirectinput.press('space')  # tower boost
+        pydirectinput.keyDown('ctrl')
+        pydirectinput.press('3')  # bm
+        pydirectinput.keyUp('ctrl')
         if shouldcontinue is not None:  # if the game ended already, stop placing towers
-            place_tower("w", player)  # randomly place 1st tower
+            shouldcontinue = place_tower("w", player, attempts=10)  # randomly place 3rd tower
+        if shouldcontinue is not None:  # if the game ended already, stop placing towers
+            shouldcontinue = place_tower("e", player, attempts=80, emote=[9, 4])  # randomly place 1st tower
         # if shouldcontinue:
         #     time.sleep(28)
         #     click("assets/surrender.png", max_tries=4)
