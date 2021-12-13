@@ -28,12 +28,12 @@ def click(imgfile, max_tries=30):
                 pyautogui.click(exiter.x, exiter.y)
                 return 'restart'  # resturn restart if we disconnected
     if res is not None:
+        print(f'\rFound {imgfile} on attempt {attempts}/{max_tries}' + ' ' * 12)
         for i in range(3):
-            print(f'\rFound {imgfile} on attempt {attempts}/{max_tries}')
             pyautogui.click(res.x, res.y)
             time.sleep(1)
         return (res.x, res.y)  # return the xy coordinates of the button if we click
-    print(f'\rUnable to find button {imgfile}, proceeding to next step')
+    print(f'\rUnable to find button {imgfile} after {max_tries} attempts, proceeding to next step')
     return None  # return None if we didn't click anything
 
 def place_tower(key, player, attempts=20, emote=()):
