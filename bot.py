@@ -51,6 +51,11 @@ def place_tower(key, player, attempts=20, emote=()):
         pydirectinput.press(key)
         x, y = random.randrange(xmin, xmax), random.randrange(ymin, ymax)
         pyautogui.click(x, y)
+        
+        if len(emote) > 0:
+            pydirectinput.keyDown('ctrl')
+            pydirectinput.press(str(emote[i % (len(emote) - 1)]))  # bloon boost
+            pydirectinput.keyUp('ctrl')
     return True
 
 
