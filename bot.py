@@ -59,7 +59,6 @@ def place_tower(key, player, attempts=20, emote=()):
             pydirectinput.keyUp('ctrl')
     return True
 
-
 loop = 0
 while True:
     print(f"{datetime.datetime.now()} Successful Games: {loop}")
@@ -94,10 +93,9 @@ while True:
         if shouldcontinue is not None:  # if the game ended already, stop placing towers
             shouldcontinue = place_tower("e", player, attempts=80, emote=[9, 4])  # randomly place 1st tower
         # if shouldcontinue:
-        #     time.sleep(28)
-        #     click("assets/surrender.png", max_tries=4)
+        #     click("assets/surrender.png", max_tries=3)
         #     time.sleep(2)
-        #     click("assets/confirm.png", max_tries=4)
+        #     click("assets/confirm.png", max_tries=3)
     if click("assets/ok.png", max_tries=128) == 'restart':  # wait until you leak to death and the win screen pops up. this may take a while
         continue
     loop += 1
