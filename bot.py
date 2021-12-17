@@ -30,7 +30,7 @@ def click(imgfile, max_tries=30, exitOnGameEnd=False, confidence=0.7, trippleCli
     attempts = 0
     while attempts < max_tries:
         time.sleep(1.6)
-        res = pyautogui.locateCenterOnScreen(imgfile, confidence=0.7)
+        res = pyautogui.locateCenterOnScreen(imgfile, confidence=confidence)
         if res is None:
             print(f"\rButton {imgfile} not found on attempt {attempts}/{max_tries}", end="")
             attempts += 1
@@ -51,9 +51,10 @@ def click(imgfile, max_tries=30, exitOnGameEnd=False, confidence=0.7, trippleCli
                 return 'restart'  # resturn restart if we disconnected
     if res is not None:
         print(f'\rFound {imgfile} on attempt {attempts}/{max_tries}' + ' ' * 12)
-        for i in range(3):
+        iterations = 3 if trippleClick else 1
+        for i in range(iterations):
             pyautogui.click(res.x, res.y)
-            time.sleep(1)
+            time.sleep(0.9)
         return (res.x, res.y)  # return the xy coordinates of the button if we click
     print(f'\rUnable to find button {imgfile} after {max_tries} attempts, proceeding to next step')
     return None  # return None if we didn't click anything
