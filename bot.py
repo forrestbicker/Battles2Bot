@@ -4,7 +4,29 @@ import random
 import time
 import datetime
 
-def click(imgfile, max_tries=30):
+def hold(key, durration):
+    pydirectinput.keyDown(key)
+    time.sleep(durration)
+    pydirectinput.keyUp(key)
+
+def bloonboost():
+    pydirectinput.keyDown('ctrl')
+    pydirectinput.press('space')  # bloon boost
+    pydirectinput.keyUp('ctrl')
+
+def towerboost():
+    pydirectinput.press('space')  # boost
+
+def sendemote(key):
+    pydirectinput.keyDown('ctrl')
+    pydirectinput.press(key)  # bloon boost
+    pydirectinput.keyUp('ctrl')
+
+def upgradepath(path, upgrades):
+    inputs = (',', '.', '/')
+    pydirectinput.press(inputs[path], upgrades, interval=0.25)
+
+def click(imgfile, max_tries=30, exitOnGameEnd=False, confidence=0.7, trippleClick=True):
     attempts = 0
     while attempts < max_tries:
         time.sleep(1.6)
